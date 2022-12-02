@@ -38,25 +38,30 @@ async function loadToken() {
 }
 
 async function axiosRequest(params, token) {
+  // console.log("params:", params)
+  const paramsForDiagnosis = params.name && params.symptoms && params.gender && params.yearOfBirth
+  const paramsForOneIssue = params.name && params.id
   let allParams;
-  if (params.id) {
-    allParams = `${params.name}/${params.id}/info`
+  if (paramsForOneIssue) {
+    allParams = `${params.name}/${params.id}/info?`
+  } else if (paramsForDiagnosis) {
+    allParams = `${params.name}?symptoms=${params.symptoms}&gender=${params.gender}&year_of_birth=${params.yearOfBirth}&`
   } else {
-    allParams = `${params.name}`
+    allParams = `${params.name}?`
   }
 
   let healthData = {};
   await axios({
-    url: `${healthserviceUri}/${allParams}?token=${token}&format=json&language=en-gb`,
+    url: `${healthserviceUri}/${allParams}token=${token}&format=json&language=en-gb`,
     method: 'GET'
   }).then((response) => {
     healthData.status = response.status
     healthData.data = response.data
 
   }).catch((err => {
-    // console.log("err in axios:", err.response.status)
+    // console.log("err in axios:", err)
     healthData.status = err.response.status
-    healthData.data = err.response.statusText
+    healthData.data = err.response.data
   }))
   return healthData;
 }
@@ -66,7 +71,7 @@ async function loadData(params, token) {
   try {
     return await axiosRequest(params, token)
   } catch (err) {
-    console.log("err: ", err)
+    // console.log("err: ", err)
     const errorobject = { status: err.response.status, statusText: err.response.statusText }
     return errorobject;
   }
