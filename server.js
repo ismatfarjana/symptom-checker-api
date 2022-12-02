@@ -50,5 +50,7 @@ app.route("/apimedic/issues/:id")
   .get(symptom.getOneIssue)
 app.route("/apimedic/diagnosis")
   .get(symptom.getDiagnosis)
+app.route("/apimedic/diagnosis/specialisations")
+  .get(symptom.getSpecialisations)
 
 module.exports = app;

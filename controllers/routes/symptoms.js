@@ -56,4 +56,20 @@ const getDiagnosis = async (req, res) => {
   return res.json({ status: diagnosis.status, diagnosis: diagnosis.data });
 }
 
-module.exports = { getSymptoms, getIssues, getOneIssue, getDiagnosis }
+const getSpecialisations = async (req, res) => {
+  const token = await getToken();
+  const params = {
+    name: 'diagnosis/specialisations',
+    symptoms: req.query.symptoms,
+    gender: req.query.gender,
+    yearOfBirth: req.query.yearOfBirth,
+  };
+
+  // console.log("params in func:", params)
+  const specialisations = await loadData(params, token);
+
+  if (!specialisations) res.status(500).json({ message: 'Error on getting specialisations from apimedic' })
+  return res.json({ status: specialisations.status, specialisations: specialisations.data });
+}
+
+module.exports = { getSymptoms, getIssues, getOneIssue, getDiagnosis, getSpecialisations }
