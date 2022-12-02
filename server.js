@@ -52,5 +52,7 @@ app.route("/apimedic/diagnosis")
   .get(symptom.getDiagnosis)
 app.route("/apimedic/diagnosis/specialisations")
   .get(symptom.getSpecialisations)
+app.route("/apimedic/symptoms/proposed")
+  .get(symptom.getProposedSymptoms)
 
 module.exports = app;
