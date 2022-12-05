@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 // const mongo = require("./database/mongo")
 const bodyParser = require('body-parser');
 
-const symptom = require('./controllers/routes/symptoms');
+const healthApi = require('./controllers/routes/healthApi');
 
 const PORT = process.env.PORT
 const uri = process.env.MONGO_URL
@@ -31,7 +31,11 @@ app.use(bodyParser.json({ type: 'application/json' }));
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-}).then(() => app.listen(PORT, () => console.log(`API listening at http://localhost: ${PORT}!`)))
+}).then(() => {
+  if (process.env.NODE_ENV !== 'test') {
+    console.log('Connected to mongoDb!')
+  }
+})
   .catch((error) => console.log(error.message));
 
 
@@ -43,16 +47,20 @@ app.get('/', (req, res) => {
 });
 
 app.route("/apimedic/symptoms")
-  .get(symptom.getSymptoms)
+  .get(healthApi.getSymptoms)
 app.route("/apimedic/issues")
-  .get(symptom.getIssues)
+  .get(healthApi.getIssues)
 app.route("/apimedic/issues/:id")
-  .get(symptom.getOneIssue)
+  .get(healthApi.getOneIssue)
 app.route("/apimedic/diagnosis")
-  .get(symptom.getDiagnosis)
+  .get(healthApi.getDiagnosis)
 app.route("/apimedic/diagnosis/specialisations")
-  .get(symptom.getSpecialisations)
+  .get(healthApi.getSpecialisations)
 app.route("/apimedic/symptoms/proposed")
-  .get(symptom.getProposedSymptoms)
+  .get(healthApi.getProposedSymptoms)
+
+
+
+app.listen(PORT, () => console.log(`API listening at http://localhost: ${PORT}!`))
 
 module.exports = app;

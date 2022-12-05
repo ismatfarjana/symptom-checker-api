@@ -38,7 +38,6 @@ async function loadToken() {
 }
 
 async function axiosRequest(params, token) {
-  // console.log("params:", params)
   const paramsForDiagnosis = params.name && params.symptoms && params.gender && params.yearOfBirth
   const paramsForOneIssue = params.name && params.id
   let allParams;
@@ -50,18 +49,16 @@ async function axiosRequest(params, token) {
     allParams = `${params.name}?`
   }
 
-  let healthData = {};
+  let healthData;
   await axios({
     url: `${healthserviceUri}/${allParams}token=${token}&format=json&language=en-gb`,
     method: 'GET'
   }).then((response) => {
-    healthData.status = response.status
-    healthData.data = response.data
-
+    console.log("response:", response)
+    healthData = response
   }).catch((err => {
-    // console.log("err in axios:", err)
-    healthData.status = err.response.status
-    healthData.data = err.response.data
+    console.log("err in axios:", err)
+    healthData = err
   }))
   return healthData;
 }
@@ -71,7 +68,6 @@ async function loadData(params, token) {
   try {
     return await axiosRequest(params, token)
   } catch (err) {
-    // console.log("err: ", err)
     const errorobject = { status: err.response.status, statusText: err.response.statusText }
     return errorobject;
   }
