@@ -49,16 +49,20 @@ async function axiosRequest(params, token) {
     allParams = `${params.name}?`
   }
 
-  let healthData;
+  let healthData = {};
   await axios({
     url: `${healthserviceUri}/${allParams}token=${token}&format=json&language=en-gb`,
     method: 'GET'
   }).then((response) => {
-    console.log("response:", response)
+    // console.log("response:", response)
     healthData = response
+    // healthData.status = response.status
+    // healthData.data = response.data
   }).catch((err => {
-    console.log("err in axios:", err)
-    healthData = err
+    // console.log("err in axios:", err)
+    // healthData.status = err.response.status
+    // healthData.data = err.response.data
+    healthData = err.response
   }))
   return healthData;
 }

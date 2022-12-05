@@ -88,4 +88,14 @@ const getProposedSymptoms = async (req, res) => {
   return res.json({ status: proposedSymptoms.status, proposedSymptoms: proposedSymptoms.data });
 }
 
-module.exports = { getSymptoms, getIssues, getOneIssue, getDiagnosis, getSpecialisations, getProposedSymptoms }
+const getBodyLocations = async (req, res) => {
+  const token = await getToken();
+  const params = { name: 'body/locations' };
+  const bodyLocations = await loadData(params, token);
+  console.log("bodyLocations:", bodyLocations)
+
+  if (!bodyLocations) res.status(500).json({ message: 'Error on getting bodyLocations from apimedic' })
+  return res.json({ status: bodyLocations.status, bodyLocations: bodyLocations.data });
+}
+
+module.exports = { getSymptoms, getIssues, getOneIssue, getDiagnosis, getSpecialisations, getProposedSymptoms, getBodyLocations }

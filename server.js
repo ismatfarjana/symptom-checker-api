@@ -58,6 +58,8 @@ app.route("/apimedic/diagnosis/specialisations")
   .get(healthApi.getSpecialisations)
 app.route("/apimedic/symptoms/proposed")
   .get(healthApi.getProposedSymptoms)
+app.route("/apimedic/locations")
+  .get(healthApi.getBodyLocations)
 
 
 

@@ -46,7 +46,6 @@ describe('health apis', () => {
       chai.request(server)
         .get('/apimedic/issues/' + issueId)
         .end((err, res) => {
-          console.log(res)
           expect(res).to.have.status(200);
           expect(res).to.be.an('object');
           expect(res.body.issue).to.have.property('Description')
