@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-const Symptom = require('../models/symptoms');
 const { loadToken, loadData } = require('../../utils/apimedic/apimedic')
 
 

@@ -37,7 +37,7 @@ async function loadToken() {
   return tokenObject;
 }
 
-function handleparams(params) {
+function handleParams(params) {
   const paramsForDiagnosis = params.name && params.symptoms && params.gender && params.yearOfBirth
   const paramsForOneIssue = (params.name === 'issues') && params.id
   const paramsForOneLocation = (params.name === 'body/locations') && params.id
@@ -58,29 +58,22 @@ function handleparams(params) {
 }
 
 async function axiosRequest(params, token) {
-  const allParams = handleparams(params);
   let healthData = {};
   await axios({
-    url: `${healthserviceUri}/${allParams}token=${token}&format=json&language=en-gb`,
+    url: `${healthserviceUri}/${params}token=${token}&format=json&language=en-gb`,
     method: 'GET'
   }).then((response) => {
-    // console.log("response:", response)
     healthData = response
-    // healthData.status = response.status
-    // healthData.data = response.data
   }).catch((err => {
-    console.log("err in axios:", err)
-    // healthData.status = err.response.status
-    // healthData.data = err.response.data
     healthData = err.response
   }))
   return healthData;
 }
 
-// 4. use token to get data
 async function loadData(params, token) {
+  const allParams = handleParams(params);
   try {
-    return await axiosRequest(params, token)
+    return await axiosRequest(allParams, token)
   } catch (err) {
     const errorobject = { status: err.response.status, statusText: err.response.statusText }
     return errorobject;
