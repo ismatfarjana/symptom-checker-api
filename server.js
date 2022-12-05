@@ -66,6 +66,11 @@ app.route("/apimedic/body/symptoms")
   .get(healthApi.getBodySymptoms)
 
 
+// Handle undefined and other routes
+app.get('*', (req, res) => {
+  res.send('Route not defined!!');
+});
+
 
 app.listen(PORT, () => console.log(`API listening at http://localhost:${PORT}!`))
 

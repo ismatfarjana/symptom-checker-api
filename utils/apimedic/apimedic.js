@@ -37,7 +37,7 @@ async function loadToken() {
   return tokenObject;
 }
 
-async function axiosRequest(params, token) {
+function handleparams(params) {
   const paramsForDiagnosis = params.name && params.symptoms && params.gender && params.yearOfBirth
   const paramsForOneIssue = (params.name === 'issues') && params.id
   const paramsForOneLocation = (params.name === 'body/locations') && params.id
@@ -54,8 +54,11 @@ async function axiosRequest(params, token) {
   } else {
     allParams = `${params.name}?`
   }
-  // console.log("allParams:", allParams)
+  return allParams;
+}
 
+async function axiosRequest(params, token) {
+  const allParams = handleparams(params);
   let healthData = {};
   await axios({
     url: `${healthserviceUri}/${allParams}token=${token}&format=json&language=en-gb`,
