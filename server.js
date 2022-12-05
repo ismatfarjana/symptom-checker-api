@@ -60,6 +60,10 @@ app.route("/apimedic/symptoms/proposed")
   .get(healthApi.getProposedSymptoms)
 app.route("/apimedic/locations")
   .get(healthApi.getBodyLocations)
+app.route("/apimedic/locations/:id")
+  .get(healthApi.getOneLocation)
+app.route("/apimedic/body/symptoms")
+  .get(healthApi.getBodySymptoms)
 
 
 

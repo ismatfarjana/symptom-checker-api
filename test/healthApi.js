@@ -55,6 +55,34 @@ describe('health apis', () => {
     })
   })
 
+  describe('/GET body locations', () => {
+    it('it should GET all the body locations', (done) => {
+
+      chai.request(server)
+        .get('/apimedic/locations')
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.bodyLocations).to.be.an('array')
+          done();
+        });
+    });
+  })
+
+  describe('/GET one body location', () => {
+    it('it should GET one location', (done) => {
+      const locationId = '11'
+      chai.request(server)
+        .get('/apimedic/locations/' + locationId)
+        .end((err, res) => {
+          expect(res).to.have.status(200);
+          expect(res).to.be.an('object');
+          expect(res.body.location).to.be.an('array')
+          done();
+        });
+    })
+  })
+
 
   // describe('/GET one diagnosis', () => {
   //   it('it should GET one diagnosis', (done) => {
