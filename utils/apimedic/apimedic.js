@@ -1,5 +1,6 @@
 const axios = require('axios');
 const CryptoJS = require("crypto-js");
+const { handleParams } = require("../global")
 
 const apiKey = process.env.APIMEDIC_API_KEY;
 const uri = process.env.APIMEDIC_AUTHSERVICE_URL;
@@ -35,26 +36,6 @@ async function loadToken() {
     return errorobject;
   }
   return tokenObject;
-}
-
-function handleParams(params) {
-  const paramsForDiagnosis = params.name && params.symptoms && params.gender && params.yearOfBirth
-  const paramsForOneIssue = (params.name === 'issues') && params.id
-  const paramsForOneLocation = (params.name === 'body/locations') && params.id
-  const paramsForBodySymptoms = (params.name === 'symptoms') && params.locationId && params.gender
-  let allParams;
-  if (paramsForOneIssue) {
-    allParams = `${params.name}/${params.id}/info?`
-  } else if (paramsForOneLocation) {
-    allParams = `${params.name}/${params.id}?`
-  } else if (paramsForBodySymptoms) {
-    allParams = `${params.name}/${params.locationId}/${params.gender}?`
-  } else if (paramsForDiagnosis) {
-    allParams = `${params.name}?symptoms=${params.symptoms}&gender=${params.gender}&year_of_birth=${params.yearOfBirth}&`
-  } else {
-    allParams = `${params.name}?`
-  }
-  return allParams;
 }
 
 async function axiosRequest(params, token) {

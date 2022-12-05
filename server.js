@@ -50,19 +50,19 @@ app.route("/apimedic/symptoms")
   .get(healthApi.getSymptoms)
 app.route("/apimedic/issues")
   .get(healthApi.getIssues)
-app.route("/apimedic/issues/:id")
+app.route("/apimedic/issues/:id") // required: issue id
   .get(healthApi.getOneIssue)
-app.route("/apimedic/diagnosis")
+app.route("/apimedic/diagnosis") // required: symptoms ids, gender, year of birth
   .get(healthApi.getDiagnosis)
-app.route("/apimedic/diagnosis/specialisations")
+app.route("/apimedic/diagnosis/specialisations") // required: symptoms ids, gender, year of birth
   .get(healthApi.getSpecialisations)
-app.route("/apimedic/symptoms/proposed")
+app.route("/apimedic/symptoms/proposed") // required: symptoms ids, gender, year of birth
   .get(healthApi.getProposedSymptoms)
 app.route("/apimedic/locations")
   .get(healthApi.getBodyLocations)
-app.route("/apimedic/locations/:id")
+app.route("/apimedic/locations/:id") // required: id
   .get(healthApi.getOneLocation)
-app.route("/apimedic/body/symptoms")
+app.route("/apimedic/body/symptoms") // required: location id, gender
   .get(healthApi.getBodySymptoms)
 
 

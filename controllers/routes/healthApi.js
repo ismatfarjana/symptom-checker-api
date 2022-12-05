@@ -113,7 +113,7 @@ const getBodySymptoms = async (req, res) => {
     gender: req.query.gender,
   };
 
-  // console.log("params in func:", params)
+  console.log("params.gender in func:", params.gender)
   const bodySymptoms = await loadData(params, token);
 
   if (!bodySymptoms) res.status(500).json({ message: 'Error on getting bodySymptoms from apimedic' })
