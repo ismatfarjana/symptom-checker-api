@@ -67,6 +67,6 @@ app.route("/apimedic/body/symptoms")
 
 
 
-app.listen(PORT, () => console.log(`API listening at http://localhost: ${PORT}!`))
+app.listen(PORT, () => console.log(`API listening at http://localhost:${PORT}!`))
 
 module.exports = app;
