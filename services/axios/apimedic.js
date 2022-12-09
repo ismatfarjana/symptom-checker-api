@@ -1,6 +1,6 @@
 const axios = require('axios');
 const CryptoJS = require("crypto-js");
-const { handleParams } = require("../global")
+const { handleParams } = require("../../utils/global")
 
 const apiKey = process.env.APIMEDIC_API_KEY;
 const uri = process.env.APIMEDIC_AUTHSERVICE_URL;
@@ -61,9 +61,4 @@ async function loadData(params, token) {
   }
 }
 
-
-
 module.exports = { loadToken, loadData };
-
-
-

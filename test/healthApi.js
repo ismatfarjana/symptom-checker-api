@@ -16,7 +16,7 @@ describe('health apis', () => {
     it('it should GET all the symptoms', (done) => {
 
       chai.request(server)
-        .get('/apimedic/symptoms')
+        .get('/healthapi/symptoms')
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.an('object');
@@ -30,7 +30,7 @@ describe('health apis', () => {
     it('it should GET all the issues', (done) => {
 
       chai.request(server)
-        .get('/apimedic/issues')
+        .get('/healthapi/issues')
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.an('object');
@@ -44,7 +44,7 @@ describe('health apis', () => {
     it('it should GET one issue', (done) => {
       const issueId = '11'
       chai.request(server)
-        .get('/apimedic/issues/' + issueId)
+        .get('/healthapi/issues/' + issueId)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.an('object');
@@ -59,7 +59,7 @@ describe('health apis', () => {
     it('it should GET all the body locations', (done) => {
 
       chai.request(server)
-        .get('/apimedic/locations')
+        .get('/healthapi/locations')
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.an('object');
@@ -73,7 +73,7 @@ describe('health apis', () => {
     it('it should GET one location', (done) => {
       const locationId = '11'
       chai.request(server)
-        .get('/apimedic/locations/' + locationId)
+        .get('/healthapi/locations/' + locationId)
         .end((err, res) => {
           expect(res).to.have.status(200);
           expect(res).to.be.an('object');
@@ -88,7 +88,7 @@ describe('health apis', () => {
   //   it('it should GET one diagnosis', (done) => {
 
   //     chai.request(server)
-  //       .get('/apimedic/diagnosis?symptoms=[9,10,11]&gender=female&yearOfBirth=1990')
+  //       .get('/healthapi/diagnosis?symptoms=[9,10,11]&gender=female&yearOfBirth=1990')
   //       .end((err, req, res) => {
   //         console.log(1)
   //         console.log(res)
