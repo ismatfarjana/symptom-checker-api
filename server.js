@@ -5,7 +5,8 @@ const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-const healthApi = require('./controllers/routes/healthApi');
+const healthApi = require('./controllers/routes/healthApiRoutes');
+const userApi = require("./controllers/routes/userRoutes")
 
 const PORT = process.env.PORT
 const uri = process.env.MONGO_URL
@@ -37,6 +38,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/healthapi', healthApi);
+app.use('/userapi', userApi);
 
 // Handle undefined and other routes
 app.get('*', (req, res) => {
