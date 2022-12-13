@@ -8,7 +8,7 @@ const { getSymptoms,
   getProposedSymptoms,
   getBodyLocations,
   getOneLocation,
-  getBodySymptoms } = require("../../utils/thirdParty/apimedic")
+  getBodySymptoms } = require("../utils/thirdParty/apimedic")
 
 
 router.get("/symptoms", getSymptoms)
