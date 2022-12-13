@@ -11,21 +11,6 @@ chai.use(chaiHttp);
 
 describe('USERS APIs', () => {
 
-  // before((done) => {
-  //   mongoose.connect('mongodb+srv://syeda:syeda@symptomchecker.3ts6yel.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true });
-  //   mongoose.connection
-  //     .once('open', () => { done(); })
-  //     .on('error', (error) => {
-  //       console.warn('Warning', error);
-  //     });
-  // });
-
-  // beforeEach((done) => {
-  //   mongoose.connection.collections.requests.deleteOne(() => {
-  //     done();
-  //   });
-  // });
-
   describe('/GET Users', () => {
     it('it should GET all users', (done) => {
 
@@ -55,11 +40,11 @@ describe('USERS APIs', () => {
           expect(res).to.be.an('object');
           expect(res.body).to.have.property('errors');
           expect(res.body.errors).to.have.property('name');
-          // done();
+          done();
         });
-      chai.request(server)
-        .delete('/userapi/' + user._id)
-        .end(() => done())
+      // chai.request(server)
+      //   .delete('/userapi/' + user._id)
+      //   .end(() => done())
     })
 
     it('it should post a user with all the fields', (done) => {
@@ -78,12 +63,12 @@ describe('USERS APIs', () => {
           expect(res.body).to.have.property('name');
           expect(res.body).to.have.property('gender');
           expect(res.body).to.have.property('yearOfBirth');
-          // done();
+          done();
         });
       // console.log("user 1:", user)
-      chai.request(server)
-        .delete('/userapi/' + user._id)
-        .end(() => done())
+      // chai.request(server)
+      //   .delete('/userapi/' + user._id)
+      //   .end(() => done())
     })
   })
 
@@ -91,7 +76,7 @@ describe('USERS APIs', () => {
   //   it('should get one user by id', (done) => {
   //     const user = {
   //       _id: '123',
-  //       name: 'test user',
+  //       name: 'test user 1',
   //       gender: 'female',
   //       yearOfBirth: '01.01.2000'
   //     }
@@ -114,10 +99,11 @@ describe('USERS APIs', () => {
   //         expect(res.body).to.have.property('name');
   //         expect(res.body).to.have.property('gender');
   //         expect(res.body).to.have.property('yearOfBirth');
+  //         done();
   //       });
-  //     chai.request(server)
-  //       .delete('/userapi/' + user._id)
-  //       .end()
+  //     // chai.request(server)
+  //     //   .delete('/userapi/' + user._id)
+  //     //   .end()
   //     // })
   //   })
   // })

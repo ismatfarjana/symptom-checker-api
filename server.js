@@ -10,7 +10,6 @@ const healthApi = require('./routes/healthApiRoutes');
 const userApi = require("./routes/userRoutes")
 
 const PORT = process.env.PORT
-const uri = process.env.MONGO_URL
 
 //parse application/json and look for raw text                                        
 app.use(bodyParser.json());
