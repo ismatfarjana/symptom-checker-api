@@ -1,21 +1,29 @@
 const dotenv = require("dotenv");
 dotenv.config();
+const cors = require('cors');
 const express = require('express');
 const app = express();
+app.use(cors({
+  methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
+}));
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 
+
 const healthApi = require('./routes/healthApiRoutes');
-const userApi = require("./routes/userRoutes")
+const userApi = require("./routes/userRoutes");
 
 const PORT = process.env.PORT
+
 
 //parse application/json and look for raw text                                        
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/json' }));
+
+
 
 
 //db connection      
@@ -39,6 +47,7 @@ app.get('/', (req, res) => {
 
 app.use('/healthapi', healthApi);
 app.use('/userapi', userApi);
+
 
 // Handle undefined and other routes
 app.get('*', (req, res) => {
